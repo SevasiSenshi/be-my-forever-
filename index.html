@@ -1,190 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Will You Be My Forever?</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #ffe6f0; /* light baby pink */
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      overflow: hidden;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ask Her Out</title>
 
-    .container {
-      text-align: center;
-      padding: 20px;
-      max-width: 90vw;
-    }
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div
+        class="tenor-gif-embed"
+        data-postid="22885016"
+        data-share-method="host"
+        data-aspect-ratio="1.04918"
+        data-width="100%"
+      >
+        <a href="https://tenor.com/view/manja-gif-22885016">Manja Sticker</a
+        >from
+        <a href="https://tenor.com/search/manja-stickers">Manja Stickers</a>
+      </div>
+      <script
+        type="text/javascript"
+        async
+        src="https://tenor.com/embed.js"
+      ></script>
+      <h1>DO you love me? 🤗</h1>
+      <p>~Ankit is all yours</p>
 
-    .typing-text {
-      font-size: 2rem;
-      font-weight: bold;
-      color: black;
-      white-space: nowrap;
-      border-right: 3px solid;
-      width: 0;
-      overflow: hidden;
-      animation: typing 3s steps(40, end) forwards, blink 0.75s step-end infinite;
-    }
-
-    @keyframes typing {
-      from { width: 0; }
-      to { width: 100%; }
-    }
-
-    @keyframes blink {
-      50% { border-color: transparent; }
-    }
-
-    button {
-      font-size: 1.2rem;
-      padding: 10px 20px;
-      margin: 10px;
-      border: 2px solid black;
-      border-radius: 10px;
-      background-color: white;
-      cursor: pointer;
-    }
-
-    .animation {
-      margin-top: 20px;
-      max-width: 300px;
-    }
-
-    .confetti {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 9999;
-    }
-
-    .message {
-      font-size: 2rem;
-      color: #ff3399;
-      margin-top: 20px;
-      font-weight: bold;
-    }
-
-    .sparkle {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      background: radial-gradient(circle, white 0%, transparent 70%);
-      border-radius: 50%;
-      animation: sparkle 2s linear infinite;
-    }
-
-    @keyframes sparkle {
-      from { transform: translateY(0); opacity: 1; }
-      to { transform: translateY(-100px); opacity: 0; }
-    }
-  </style>
-</head>
-<body>
-  <audio autoplay loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
-  </audio>
-
-  <div class="container">
-    <img id="catGif" src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Cat" class="animation" />
-    <div class="typing-text" id="question">Will you be my forever?</div>
-    <div>
-      <button onclick="handleAnswer('yes')">Yes</button>
-      <button onclick="handleAnswer('no')">No</button>
+      <div class="btn">
+        <a href="yes.html">Yes</a>
+        <a href="no1.html">No</a>
+      </div>
     </div>
-    <div id="result"></div>
-  </div>
-
-  <canvas class="confetti" id="confettiCanvas"></canvas>
-
-  <script>
-    let sadGif = 'https://media.giphy.com/media/3orieUe6ejxSFxYCXe/giphy.gif';
-    let happyGif = 'https://media.giphy.com/media/dzaUX7CAG0Ihi/giphy.gif';
-    let sparkleCount = 40;
-
-    function createSparkles() {
-      for (let i = 0; i < sparkleCount; i++) {
-        const sparkle = document.createElement('div');
-        sparkle.className = 'sparkle';
-        sparkle.style.left = Math.random() * 100 + 'vw';
-        sparkle.style.top = Math.random() * 100 + 'vh';
-        sparkle.style.animationDuration = 1 + Math.random() * 2 + 's';
-        document.body.appendChild(sparkle);
-        setTimeout(() => sparkle.remove(), 2000);
-      }
-    }
-
-    function playSound(src) {
-      let audio = new Audio(src);
-      audio.play();
-    }
-
-    function handleAnswer(answer) {
-      const result = document.getElementById('result');
-      const question = document.getElementById('question');
-      const catGif = document.getElementById('catGif');
-      result.innerHTML = '';
-
-      if (answer === 'no') {
-        playSound('https://www.soundjay.com/button/sounds/button-10.mp3');
-        result.innerHTML = `
-          <img src="${sadGif}" class="animation" />
-        `;
-        setTimeout(() => {
-          handleAnswer('loop');
-        }, 2000);
-      } else if (answer === 'yes') {
-        playSound('https://www.soundjay.com/human/sounds/applause-8.mp3');
-        result.innerHTML = `
-          <img src="${happyGif}" class="animation" style="max-width: 350px;" />
-          <div class="message">Yaaayyy!!</div>
-          <div class="message">Thank you my love 💖</div>
-        `;
-        startConfetti();
-        createSparkles();
-      }
-    }
-
-    function startConfetti() {
-      const canvas = document.getElementById('confettiCanvas');
-      const ctx = canvas.getContext('2d');
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-
-      const pieces = Array.from({ length: 150 }, () => ({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 10 + 5,
-        speed: Math.random() * 3 + 2,
-        color: `hsl(${Math.random() * 360}, 100%, 70%)`
-      }));
-
-      function update() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        pieces.forEach(p => {
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-          ctx.fillStyle = p.color;
-          ctx.fill();
-          p.y += p.speed;
-          if (p.y > canvas.height) p.y = 0;
-        });
-        requestAnimationFrame(update);
-      }
-      update();
-    }
-  </script>
-</body>
+  </body>
 </html>
-
