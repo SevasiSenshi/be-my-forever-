@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Will You Be My Forever?</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #ffe6f0; /* light baby pink */
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    #question-container {
+      padding: 20px;
+      border-radius: 12px;
+      background-color: white;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .question-text {
+      font-size: 2rem;
+      margin: 20px 0;
+      animation: typing 2s steps(30), blink .75s step-end infinite;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 3px solid black;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent }
+    }
+
+    .btn {
+      padding: 10px 30px;
+      margin: 10px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      border-radius: 10px;
+      border: 2px solid black;
+      background-color: white;
+    }
+
+    .gif {
+      max-width: 200px;
+      height: auto;
+      margin-top: 20px;
+    }
+
+    #confetti {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    .message {
+      font-size: 2rem;
+      margin-top: 10px;
+    }
+
+    .floating-heart {
+      position: absolute;
+      color: red;
+      font-size: 24px;
+      animation: floatUp 4s ease-in infinite;
+    }
+
+    @keyframes floatUp {
+      0% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(-100vh); }
+    }
+
+    @media (max-width: 600px) {
+      .question-text {
+        font-size: 1.5rem;
+      }
+      .btn {
+        font-size: 1rem;
+        padding: 8px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <audio autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mp3">
+  </audio>
+
+  <div id="confetti"></div>
+
+  <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExemQ1bHZyZmd3MDRuMTl6bnRxYzhjZTVuOGQ3OTNtZ2UwZ2MxNTZ3ayZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3oriO0OEd9QIDdllqo/giphy.gif" class="gif" id="catGif">
+
+  <div id="question-container">
+    <div class="question-text" id="question">Will you be my forever?</div>
+    <button class="btn" onclick="handleAnswer('yes')">Yes</button>
+    <button class="btn" onclick="handleAnswer('no')">No</button>
+    <div class="message" id="message"></div>
+    <div id="animation"></div>
+  </div>
+
+  <script>
+    const questionText = document.getElementById("question");
+    const messageDiv = document.getElementById("message");
+    const animationDiv = document.getElementById("animation");
+    const catGif = document.getElementById("catGif");
+    const confettiContainer = document.getElementById("confetti");
+
+    function handleAnswer(answer) {
+      if (answer === "yes") {
+        messageDiv.innerHTML = "Yaaayyy!!<br>Thank you my love 💖";
+        animationDiv.innerHTML = '<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExc21mY3BvOW0ycW5ibDMyNmtmN3p2bTJtc2ViMGF0dnl2M3I5ZzVhZCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/l2R00fGqtHkvyKX7C/giphy.gif" class="gif" style="max-width:300px">';
+        showConfetti();
+        showHearts();
+      } else {
+        messageDiv.innerHTML = "";
+        animationDiv.innerHTML = '<img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdmduNWIwYndqMmpjcW94b3h1a3hzZXBjbGxjM3A0ZzFjcGZkZHp0dyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/l4FGJjzAFVsJvmu4U/giphy.gif" class="gif" style="max-width:300px">';
+        setTimeout(() => {
+          questionText.innerText = "Will you be my forever?";
+          messageDiv.innerHTML = "";
+          animationDiv.innerHTML = "";
+          catGif.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExemQ1bHZyZmd3MDRuMTl6bnRxYzhjZTVuOGQ3OTNtZ2UwZ2MxNTZ3ayZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3oriO0OEd9QIDdllqo/giphy.gif";
+        }, 2500);
+      }
+    }
+
+    function showConfetti() {
+      for (let i = 0; i < 100; i++) {
+        const div = document.createElement("div");
+        div.classList.add("floating-heart");
+        div.innerText = ["❤️", "💖", "💘", "💕"][Math.floor(Math.random()*4)];
+        div.style.left = Math.random() * 100 + "%";
+        div.style.fontSize = (Math.random() * 20 + 10) + "px";
+        div.style.animationDuration = (Math.random() * 3 + 2) + "s";
+        confettiContainer.appendChild(div);
+        setTimeout(() => div.remove(), 5000);
+      }
+    }
+
+    function showHearts() {
+      const interval = setInterval(() => {
+        const div = document.createElement("div");
+        div.className = "floating-heart";
+        div.innerHTML = "❤️";
+        div.style.left = Math.random() * 100 + "%";
+        div.style.fontSize = (Math.random() * 24 + 12) + "px";
+        confettiContainer.appendChild(div);
+        setTimeout(() => div.remove(), 4000);
+      }, 300);
+      setTimeout(() => clearInterval(interval), 3000);
+    }
+  </script>
+</body>
+</html>
